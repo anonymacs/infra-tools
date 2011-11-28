@@ -1,0 +1,21 @@
+#=== メンテ画面へ強制リダイレクト ===#
+
+ErrorDocument 503 /foo/mente_kun.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  #RewriteCond %{REMOTE_ADDR} !^192\.168\.0\.xxx
+  RewriteCond %{REQUEST_URI} !/foo/mente_kun.html$ [NC]
+  RewriteRule .* /foo/mente_kun.html [R=302,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Retry-After "Sat, 1 Jan 2011 8:00:00 JST"
+</IfModule>
+
+
+## リバースプロキシ用のIP制限
+SetEnvIf X-Forwarded-For "^192\.168\.0\.xxx" allowed_access
+order deny,allow
+deny from all
+allow from env=allowed_access

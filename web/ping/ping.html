@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja-JP">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<title>Applogic Web App</title>
+<script type='text/javascript'>
+<!--
+/* Ajaxを準備する */
+ajax = new XMLHttpRequest();
+
+/* メインのファンクション */
+function ping() {
+/* Ajax呼び出し処理 */
+	document.getElementById("results").innerHTML = '<table>\n';
+	ajax.open('POST', 'ping.php', true);
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	var sIP = $("#sIP").val();
+	var eIP = $("#eIP").val();
+
+	var net = $("#net").val();
+	var num = $("#num").val();
+	var sec = $("#sec").val();
+	var t_out = $("#t_out").val();
+
+	for (var i = sIP; i <= eIP; i ++) {
+		document.getElementById("results").innerHTML += 'num-'+ i +'\n';
+		var cIP =  net + i;
+		ajax.send('cIP='+ cIP +'&num='+ num +'&sec='+ sec +'&t_out='+ t_out);
+		
+		ajax.onload = function() {
+			var pRes = ajax.responseText;
+			document.getElementById("results").innerHTML += '<tr><td>'+ cIP +'</td><td>'+ pRes +'</td></tr>\n';
+		}
+	}
+
+
+/*	var cIP =  net + '189';
+	var com =  ping + '189';
+
+	ajax.send('cIP='+ cIP +'&num='+ num +'&sec='+ sec +'&t_out='+ t_out);
+	ajax.onload = function() {
+		var pRes = ajax.responseText;
+		document.getElementById("results").innerHTML += '<tr><td>'+ '' +'</td><td>'+ pRes +'</td></tr>\n';
+	}
+*/
+	document.getElementById("results").innerHTML += '<table>\n';
+}
+
+//-->
+</script>
+</head>
+<body>
+
+<div id="container">
+  <div id="header">
+  <h1>AjaxTest Ping WebApp</h1>
+  </div>
+
+    <div id="wrapper">
+
+<div id="control">
+
+  <form id="formMain" name="formMain" method="post" action="">
+    <input name="ssh" type="button" id="" value="ping検索開始" onClick="ping();" /><br />
+    startIP : <input name="sIP" type="text" id="sIP" value="1" /><br />
+    endIP : <input name="eIP" type="text" id="eIP" value="10" /><br />
+    net : <input name="net" type="text" id="net" value="172.16.6." /><br />
+<br />
+    num : <input name="num" type="text" id="num" value="3" /><br />
+    sec : <input name="sec" type="text" id="sec" value="0.2" /><br />
+    timeout : <input name="t_out" type="text" id="t_out" value="1" /><br />
+<br />
+
+</form>
+
+</div>
+
+      <div id="stdout">
+        <p id="results"></p>
+      </div>
+
+      <div id="stderr">
+        <div id="error"></div>
+      </div>
+
+    </div>
+
+  <div id="footer"><p id="log"></p></div>
+
+</div>
+
+</body>
+</html>

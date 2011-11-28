@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja-JP">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<title>Applogic Web App</title>
+<script type='text/javascript'>
+<!--
+/* Ajaxを準備する */
+ajax = new XMLHttpRequest();
+
+/* メインのファンクション */
+function command(com_id) {
+/* Ajax呼び出し処理 */
+	ajax.open('POST', 'func.php', true);
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send('com_id=' + com_id);
+
+	/* メインの処理 */
+	ajax.onload = function() {
+		var resultData = ajax.responseText;
+		document.getElementById("results").innerHTML = "echo";
+		document.getElementById("log").innerHTML = 'print';
+        }
+}
+
+//-->
+</script>
+</head>
+<body>
+
+<div id="container">
+  <div id="header">
+  <h1>AjaxTest WebApp</h1>
+  </div>
+
+    <div id="wrapper">
+
+<div id="control">
+
+  <form id="formMain" name="formMain" method="post" action="">
+    <input name="ssh" type="button" id="ssh" value="SSH接続開始" onClick="command('1');" /><br />
+    <br />
+    <input name="comtext" type="text" id="comtext" /><br />
+    <input name="ssh" type="button" id="ssh" value="コマンド実行" onClick="command2('2');" />
+  </form>
+
+</div>
+
+      <div id="stdout">
+        <p id="history">>　</p>
+        <p id="results"></p>
+      </div>
+
+      <div id="stderr">
+        <div id="error"></div>
+      </div>
+
+    </div>
+
+  <div id="footer"><p id="log"></p></div>
+
+</div>
+
+</body>
+</html>
