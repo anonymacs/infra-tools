@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-#
 
 #########################################
-### ver 2.5 Plantagenet
+### ver 3.0 Britain
 #########################################
 
 import os, commands, re, sys
@@ -35,9 +35,8 @@ keyuser=''
 complexdata = ""
 ipaddr = ""
 
-user1='user1'
-user2='user2'
-
+user1 = ''
+user2 = ''
 
 #================================================================
 # 初回実行処理
@@ -49,10 +48,10 @@ if not os.path.exists(sshkey) :
 	commands.getoutput('scp '+ sendto +':/home/filescp/.ssh/id_rsa ' + basedir +'/.ssh/')
 #	commands.getoutput('scp '+ sendto +' "cat /home/'+ senduser +'/.ssh/id_rsa" | cat >> '+ sshkey)
 	if keyuser == '':
-		if os.path.exists('/home/'+ user2 +'/.ssh/id_rsa') :
-			keyuser =  user2 +'.'+ user2
+		if os.path.exists('/home/' + user2 + '/.ssh/id_rsa') :
+			keyuser = user2 +'.'+ user2
 		else:
-			keyuser =  user1 +'.'+ user1
+			keyuser = user1 +'.'+ user1
 	else:
 		keyuser = keyuser +'.'+ keyuser
 	
@@ -119,7 +118,7 @@ else:
 ## Applogicの複雑なアプリの場合の処理
 if ipaddr == "":
 	print "外部スクリプトからIPアドレスを取得します\n"	
-	complexdata = commands.getoutput('wget -q -O - http://' +sendip+ '/dirsize/ipaddr.php')
+	complexdata = commands.getoutput('wget -q -O - http://'+ sendip +'/dirsize/ipaddr.php')
 	complexdata = complexdata.split('=')
 	ipaddr = complexdata[0]
 	f_appname =  appname + '_'+ aplance[1:]
@@ -146,7 +145,7 @@ for line in hdddata :
 		print "NASを検出しました"
 		nas = 1
 		nashdd = line[1] +'\t'+ line[2] +'\t'+ line[4] +'\t'+ line[3]
-	elif line[0].startswith("/dev/hd"):
+	elif line[0].startswith("/dev/"):
 		print "HDDを検出しました"
 		hdd = line[1] +'\t'+ line[2] +'\t'+ line[4] +'\t'+ line[3]
 
@@ -181,13 +180,19 @@ memcache = str(memcache) + 'MB'
 ## 初期化
 version = []
 
+## ミドルウェア洗い出し用
+versions = {}
+
 ## [0] apacheのバージョン確認
 try:
 	tmp = commands.getoutput('/usr/local/apache2/bin/httpd -v 2> /dev/null | grep version')
 	tmp = re.split("\s+", tmp)
 	version.append( tmp[2].lstrip('Apache/') )
+	versions["apache"] = tmp[2].lstrip('Apache/')
+	
 except:
 	version.append( '-' )
+	versions["apache"] = 
 
 ## [1] apache (yum)のバージョン確認
 try:
@@ -378,4 +383,5 @@ if nas == 1 :
 		autorun[num] = '-'
 		num += 1
 	htmloutput(nashdd, nasfile)
+
 
