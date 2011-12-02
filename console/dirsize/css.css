@@ -1,0 +1,100 @@
+table.dir{
+    border:2px solid #000000;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-color:#fff;
+    empty-cells:show;
+}
+
+th.d1{
+    border-right:1px solid #0066aa;
+    border-bottom:1px solid #0066aa;
+    color:#000033;
+    background-color:#2288cc;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+th.d2{
+    border-right:1px solid #00aa66;
+    border-bottom:1px solid #00aa66;
+    color:#003300;
+    background-color:#22cc88;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+th.d3{
+    border-right:1px solid #00aaaa;
+    border-bottom:1px solid #00aaaa;
+    color:#003333;
+    background-color:#22cccc;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+th.d4{
+    border-right:1px solid #aa9900;
+    border-bottom:1px solid #aa9900;
+    color:#443300;
+    background-color:#bbaa33;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+th.d5{
+    border-right:1px solid #aa66aa;
+    border-bottom:1px solid #aa66aa;
+    color:#330033;
+    background-color:#aa66aa;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+th.d6{
+    border-right:1px solid #663300;
+    border-bottom:1px solid #663300;
+    color:#330000;
+    background-color:#996633;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+
+td.d1{
+    border: 1px solid #000000;
+    padding:0.3em 1em;
+    text-align: right;
+}
+
+td.d2{
+    border: 1px solid #00aa66;
+    padding:0.3em 1em;
+    text-align: right;
+}
+td.d3{
+    border: 1px solid #00aaaa;
+    padding:0.3em 1em;
+    text-align: right;
+}
+td.d4{
+    border: 1px solid #aa9900;
+    padding:0.3em 1em;
+    text-align: right;
+}
+td.d5{
+    border: 1px solid #aa66aa;
+    padding:0.3em 1em;
+    text-align: right;
+}
+td.d6{
+    border: 1px solid #000000;
+    padding:0.3em 1em;
+    text-align: right;
+}
+
+span.gbyte{
+	color:#cc3333;
+	font-size: 110%;
+	font-weight: 900;
+}
